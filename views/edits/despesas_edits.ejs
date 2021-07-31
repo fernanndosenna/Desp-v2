@@ -1,0 +1,42 @@
+<% include("../partials/header.ejs")%>
+<body>
+    <main>
+        <div>
+            <form action="/despesas/cadastrar" method="post">
+                Tipo: <input type="text" name="tipo"  placeholder="Tipo da despesa"/><br>
+                Descrição: <input type="text" name="descricao" placeholder="Descrição"/><br>
+                valor: <input type="number" name="valor"  placeholder="valor"/><br>
+                Data: <input type="date" name="data" placeholder="data"/><br>
+                <button>Cadastrar</button>
+            </form>
+        </div>
+      
+
+        <div>
+            <div>
+                <ul>
+                    <li>
+                        <form action="/despesas/atualizar" method="post">
+                            <input type="hidden" name="id" value="<%= despesa.id %>"/>
+                            <span>Tipo</span>
+                            <span><input type="text" name="tipo" value="<%= despesa.tipo %>"/></span>
+                            <br>
+                            <span>Descrição</pan>
+                            <span><input type="text" name="descricao" value="<%= despesa.descricao  %>" /></span>
+                            <br>
+                            <span>Valor</span>
+                            <span><input type="number" name="valor" value="<%= despesa.valor %>"/></span>
+                            <br>
+                            <span>Data</span>
+                            <span><input type="date" name="data" value="<%= despesa.data %>"/></span>
+                            <br>
+                            <button>Atualizar</button>
+                      </form>
+                    </li>
+                   <hr>
+                </ul>
+            </div>
+        </div>
+    </main>
+</body>
+<% include("../partials/footer.ejs")%>

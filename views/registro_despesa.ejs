@@ -1,0 +1,43 @@
+<% include("partials/header.ejs")%>
+<body>
+    <main>
+        <div>
+            <form action="/despesas/cadastrar" method="post">
+                Tipo: <input type="text" name="tipo"  placeholder="Tipo da despesa"/><br>
+                Descrição: <input type="text" name="descricao" placeholder="Descrição"/><br>
+                valor: <input type="number" name="valor"  placeholder="valor"/><br>
+                Data: <input type="date" name="data" placeholder="data"/><br>
+                <button>Cadastrar</button>
+            </form>
+        </div>
+      
+
+        <div>
+            <div>
+                <ul>
+                    <% listaDespesas.forEach(despesa => { %>
+                    <li>
+                        <span>Tipo</span>
+                        <span><%= despesa.tipo %></span>
+                        <br>
+                        <span>Descrição</span>
+                        <span><%= despesa.descricao %></span>
+                        <br>
+                        <span>Valor</span>
+                        <span><%= despesa.valor %></span>
+                        <br>
+                        <span>Data</span>
+                        <span><%=  despesa.data  %></span>
+                        <br>
+                        <a href="/despesas/edit/<%= despesa.id %>"><span>Editar</span></a>
+                        <a  href="/despesas/deletar/<%= despesa.id %>"><span>Deletar</span></a>
+                    </li>
+                    <hr>
+
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
+    </main>
+</body>
+<% include("partials/footer.ejs")%>
