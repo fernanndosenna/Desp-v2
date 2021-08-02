@@ -54,6 +54,7 @@ class Despesas{
         }
     }
 
+    //deletando uma despesa
     async deletar(id){
         var despesa = await this.encontrarIdDespesa(id);
 

@@ -6,13 +6,19 @@ class registroDespesasController{
 
     //renderizando a view de registro 
     async indexRegistro(req,res){
+        var msgErr = req.flash("msgErr"); //vai atrás da variavel que contém a mensagem
+        var msgSuccess = req.flash("msgSuccess"); //vai atrás da variavel que contém a mensagem
+
+        msgErr = (msgErr == undefined  || msgErr.length == 0 ) ? undefined : msgErr
+        msgSuccess = (msgSuccess == undefined  || msgSuccess.length == 0 ) ? undefined : msgSuccess
+
 
         var listaDespesas = await Despesas.pegarTodasDespesas();
 
         if(listaDespesas == undefined){
             listaDespesas = []
         }
-        res.render("registro_despesa", {listaDespesas});
+        res.render("registro_despesa", {listaDespesas, msgErr,msgSuccess});
     }
 
 
@@ -21,22 +27,30 @@ class registroDespesasController{
     //metodo de cadastro através do model Despesas
     async cadastrarDespesas(req,res){
         var { tipo, descricao, valor, data } = req.body;
+        var msgErr
+        var msgSuccess
 
         if(tipo == undefined || tipo == '' || tipo == ' '){
-            console.log("campo não pode ser vazio!")
+            msgErr = "Tipo não pode ser vazio"
+
         }
             
         if(descricao == undefined || descricao == '' || descricao == ' '){
-            console.log("campo não pode ser vazio!")
+            msgErr = "Descrição não pode ser vazio"
         }
 
         if(valor == undefined || valor == '' || valor == ' '){
-            console.log("campo não pode ser vazio!")
+            msgErr = "Valor não pode ser vazio"
         }
 
         
         if(data == undefined || data == '' || data == ' '){
-            console.log("campo não pode ser vazio!")
+            msgErr = "Data não pode ser vazio"
+        
+        }
+        if(msgErr !=  undefined){
+            req.flash("msgErr", msgErr)
+            res.redirect("/")
         }
 
         await Despesas.cadastrar(tipo, descricao, valor,data);
@@ -48,10 +62,12 @@ class registroDespesasController{
 
 
 
-    //editar despesa
+    //mostrando view de edit com a despesa clicada
     async editarDespesa(req,res){
         var { id } = req.params;
+        var msgErr = req.flash("msgErr"); //vai atrás da variavel que contém a mensagem
 
+        msgErr = (msgErr == undefined  || msgErr.length == 0 ) ? undefined : msgErr
         if(isNaN(id)){
             res.redirect("/")
         }
@@ -59,7 +75,7 @@ class registroDespesasController{
         try {
                 var despesa = await Despesas.encontrarIdDespesa(id);
                 if(despesa != undefined){
-                    res.render("../views/edits/despesas_edits", {despesa})
+                    res.render("../views/edits/despesas_edits", {despesa, msgErr})
                 }
 
         } catch (error) {
@@ -73,8 +89,32 @@ class registroDespesasController{
     //atualizar despesa
     async atualizarDespesa(req,res){
         var { id, tipo, descricao, valor, data} = req.body;
+        var msgErr
+        var msgSuccess
 
-        console.log(tipo)
+        if(tipo == undefined || tipo == '' || tipo == ' '){
+            msgErr = "Tipo não pode ser vazio"
+
+        }
+
+        if(descricao == undefined || descricao == '' || descricao == ' '){
+            msgErr = "Tipo não pode ser vazio"
+
+        }
+
+        if(valor == undefined || valor == '' || valor == ' '){
+            msgErr = "Tipo não pode ser vazio"
+
+        }
+        if(data == undefined || data == '' || data == ' '){
+            msgErr = "Tipo não pode ser vazio"
+
+        }
+        if(msgErr != undefined){
+            req.flash("msgErr", msgErr)
+            res.redirect(`/despesas/edit/${id}`)
+            return
+        }
         var despesasEditadas = {};
 
         despesasEditadas.tipo = tipo; // recebe novo dado editado
@@ -86,6 +126,8 @@ class registroDespesasController{
         try {
             
             await knex.update(despesasEditadas).where({id: id}).table("despesas");
+             msgSuccess = "Editado com sucesso!"
+             req.flash("msgSuccess", msgSuccess)
              res.redirect("/")
         } catch (error) {
             console.log(error)
@@ -96,12 +138,13 @@ class registroDespesasController{
     //deletar despesa
     async deletarDespesa(req,res){
         var { id } = req.params
-
+        var msgSuccess
         try {
             var resultado = await Despesas.deletar(id);
 
             if(resultado){
-                console.log("delete com sucesso!")
+                msgSuccess = "Delete com sucesso!"
+                req.flash("msgSuccess", msgSuccess)
                 res.redirect("/")
             }
             

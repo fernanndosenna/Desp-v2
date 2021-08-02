@@ -1,4 +1,4 @@
-<% include("../partials/header.ejs")%>
+<%- include("../partials/header.ejs")%>
 <body>
     <main>
         <div>
@@ -13,6 +13,13 @@
       
 
         <div>
+            <% if(msgErr) {%>
+                <div class="alert alert-danger">
+                    <p><%= msgErr %></p>
+    
+                </div>
+            <% } %>
+    
             <div>
                 <ul>
                     <li>
@@ -39,4 +46,4 @@
         </div>
     </main>
 </body>
-<% include("../partials/footer.ejs")%>
+<%- include("../partials/footer.ejs")%>
