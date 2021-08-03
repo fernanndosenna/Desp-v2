@@ -1,0 +1,184 @@
+.main-despesa{
+    height:100vh;
+    display: flex;
+}
+.fundo-1-despesa{
+    width:50%;
+}
+.fundo-1-despesa nav{
+    width:100%;
+    display: flex;
+    padding: 20px 0;
+}
+.fundo-1-despesa nav a {
+    color:#757575;
+}
+.fundo-1-despesa nav li{
+    padding: 5px;
+    border-radius: 4px;
+    margin-right: 10px;
+    margin-left: 10px;
+    transition: 100ms ease-in;
+}
+.fundo-1-despesa nav li:hover{
+    transform: scale(1.1);
+}
+
+.header-titulo{
+    width:100%;
+    padding:30px 0;
+    text-align: center;
+    position:relative;
+}
+.header-titulo h2{
+    color:#757575;
+}
+.header-titulo-hr {
+    position: absolute;
+    top: 70px;
+    width:300px;
+    left:185px;}
+
+
+.form-container{
+    height:350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-container form{
+    padding: 60px;
+}
+.input-container{
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.input-container input{
+    text-align: center;
+    background: #EFEFEF;
+    border: 1px solid #A9A9A9;
+    box-sizing: border-box;
+    border-radius: 45px;
+    color: #2f2f2f;
+
+}
+.input-container button{
+    color:#fff;
+    background: #75976C;
+    border: 1px solid #797979;
+    box-sizing: border-box;
+    border-radius: 45px;
+    transition: 200ms ease-in;
+}
+.input-container button:hover{
+    background:transparent;
+    color: #757575;
+    transform: scale(1.1);
+}
+.input-container label{
+    color:#757575;
+    margin-bottom: 5px;
+}
+.fundo-2-despesa{
+    width:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #75976C;
+}   
+.lista-despesas{
+    width: 500px;
+    height: 500px;
+    overflow: auto;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 22px;
+}
+.lista-despesas ul {
+    margin-top:10px;
+    padding: 30px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.lista-despesas .lista-icons{
+    width: 70px;
+    display:flex;
+    flex-direction: column-reverse;
+    justify-content:center;
+    align-items: center;
+}
+.lista-despesas .lista-icons span{
+    display:block;
+    color:#757575;
+    cursor: pointer;
+    font-size: 30px;
+    transition:200ms ease-in;
+}
+.lista-despesas .lista-icons span:hover{
+    transform: scale(1.1);
+}
+.lista-despesas ul li{
+    width: 400px;
+    height: 130px;
+    
+    background: #525252;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 22px;
+}
+
+.informacoes-container{
+        grid-template-areas: 
+        "tipo valor data"
+        "descricao descricao descricao"
+        ;
+}
+.item{
+	text-align: center;
+
+}
+.item span{
+    display:block;
+}
+.item span + span{
+    color:#F6F6F6
+    ;
+}
+.grid{
+    padding: 10px;
+    display: grid;
+	margin: 0 auto;
+    border-right: 1px solid #C1C1C1;
+}
+.tipo{
+    grid-area: tipo;
+    border-right: 1px solid #C1C1C1;
+}
+.tipo span:first-child{
+    color:#C1C1C1;
+}
+
+.valor{
+    grid-area: valor;
+    border-right: 1px solid #C1C1C1;
+}
+.valor span:first-child{
+    color: #C1C1C1 ;
+}
+.data{
+    grid-area: data;
+
+}
+.data span:first-child{
+    color: #C1C1C1;
+}
+.descricao{
+    grid-area: descricao;
+}
+.descricao span:first-child{
+    color:#C1C1C1 ; 
+}

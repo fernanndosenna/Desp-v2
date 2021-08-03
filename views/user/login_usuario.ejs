@@ -1,30 +1,35 @@
 <%- include("../partials/header.ejs") %>
 <body>
+  <main class="main-login">
     <header>
-        <h2>Login de usuário</h2>
+        <h2>Login de Usuário</h2>
+        <hr>
     </header>
-    <div>
-            <% if(msgErr) {%>
-                <div class="alert alert-danger">
-                    <p><%= msgErr %></p>
-
-                </div>
-            <% } %>
+      <div class="fundo-login-1">
         
-  
-        <form action="/login/autenticar" method="post">
-            <div>
-            <label for="">Email: </label>
-            <input type="text" name="email" placeholder="Email de usuário"/>
-            </div>
+        <div class="form-login-container">
+            <form action="/login/autenticar" method="post">   
+                   <div>
+                    <label for="">Email: </label>
+                    <input type="text" name="email" placeholder="Email de usuário"/>
+                    </div>
+        
+                    <div>
+                        <label for="">Senha: </label>
+                        <input name="senha" type="password" placeholder="senha"/>
+                    </div>
 
-            <div>
-                <label for="">Senha: </label>
-                <input name="senha" type="password" placeholder="senha"/>
-            </div>
-            <button>Logar</button>
-            <a href="/cadastro/usuario"><span>Cadastrar</span></a>
-        </form>
-    </div>
+                    <div>
+                        <button class="botao-estilo">Logar</button>
+                        <a href="/cadastro/usuario" class="botao-estilo"><span>Cadastrar</span></a>
+                    </div>
+            </form>
+        </div>
+      </div>
+      
+      <div class="fundo-login-2">
+            <h1>Controle de Despesas</h1>
+      </div>
+  </main>
 </body>
 <%- include("../partials/footer.ejs") %>

@@ -1,62 +1,95 @@
 <%- include("partials/header.ejs")%>
 <body>
-    <main>
- 
-        <nav>
-            <a href="/deslogar/usuario"><li>Deslogar</li></a>
-            <a href="/login/usuario"><li>Login</li></a>
-            <a href="/cadastro/usuario"><li>Cadastrar</li></a>
-        </nav>
-        <div>
+    <main class="main-despesa">
+        <div class="fundo-1-despesa">
+            <nav>
+                <a href="/deslogar/usuario"><li>Deslogar</li></a>
+                <a href="/login/usuario"><li>Login</li></a>
+                <a href="/cadastro/usuario"><li>Cadastrar</li></a>
+            </nav>
+            <div class="header-titulo">
+                <h2>Controle de despesa</h2>
+                <hr class="header-titulo-hr">
+            </div>
+            <div class="form-container">
+                <form action="/despesas/cadastrar"  method="post">
+                    <div class="input-container">
+                                <label>Tipo</label>
+                                <input id="tipo" type="text" name="tipo"  placeholder="Tipo da despesa"/>
+                    </div>
+
+                    <div class="input-container">
+                                <label for="valor">Valor</label>
+                                <input id="valor" type="number" name="valor"  placeholder="valor"/>
+                    </div>
+
+                    <div class="input-container">
+                                <label for="data">Data</label>
+                                <input id="data" type="date" name="data" placeholder="data"/>
+                    </div>
+
+                    <div class="input-container">
+                                <label for="descricao">Descrição</label>
+                                <input id="descricao" type="text" name="descricao" placeholder="Descrição"/>
+                    </div>
+
+                    <div class="input-container">
+                            <button>Cadastrar</button>
+                     </div>
+                </form>
+            </div>
+
             <% if(msgErr) {%>
                 <div class="alert alert-danger">
                     <p><%= msgErr %></p>
     
                 </div>
             <% } %>
-    
-            <form action="/despesas/cadastrar" method="post">
-                Tipo: <input type="text" name="tipo"  placeholder="Tipo da despesa"/><br>
-                Descrição: <input type="text" name="descricao" placeholder="Descrição"/><br>
-                valor: <input type="number" name="valor"  placeholder="valor"/><br>
-                Data: <input type="date" name="data" placeholder="data"/><br>
-                <button>Cadastrar</button>
-            </form>
-        </div>
-      
 
-        <div>
             <% if(msgSuccess) {%>
                 <div class="alert alert-success">
                     <p><%= msgSuccess %></p>
     
                 </div>
             <% } %>
-            <div>
-                <ul>
-                    <% listaDespesas.forEach(despesa => { %>
-                    <li>
-                        <span>Tipo</span>
-                        <span><%= despesa.tipo %></span>
-                        <br>
-                        <span>Descrição</span>
-                        <span><%= despesa.descricao %></span>
-                        <br>
-                        <span>Valor</span>
-                        <span><%= despesa.valor %></span>
-                        <br>
-                        <span>Data</span>
-                        <span><%=  despesa.data  %></span>
-                        <br>
-                        <a href="/despesas/edit/<%= despesa.id %>"><span>Editar</span></a>
-                        <a  href="/despesas/deletar/<%= despesa.id %>"><span>Deletar</span></a>
-                    </li>
-                    <hr>
+        </div>
 
-                    <% }) %>
+        <div class="fundo-2-despesa"> 
+            <div class="lista-despesas">
+                <% listaDespesas.forEach(despesa => { %>
+                <ul>
+                    <div class="lista-icons">
+                        <a  href="/despesas/deletar/<%= despesa.id %>"> <span><i class="far fa-trash-alt"></i></span></a>
+                        <a href="/despesas/edit/<%= despesa.id %>"> <span><i class="fas fa-pencil-alt"></i></span></a>
+                   </div>
+                    <li class="grid informacoes-container">
+                        <div class="item tipo">
+                            <span>tipo</span>
+                            <span><%= despesa.tipo %></span>
+                        </div>
+                        <div class="item valor">
+                            <span>Valor</span>
+                            <span><%= despesa.valor %></span>
+                        </div >
+                        <div class="item data">
+                            <span>Data</span>
+                            <span><%=  despesa.data  %></span>
+
+                        </div>
+                        <div class="item descricao">
+                            <span>Descrição</span>
+                            <span><%= despesa.descricao %></span>
+
+                        </div>
+
+                    </li>
                 </ul>
+                <% }) %>
+
             </div>
         </div>
+
+
     </main>
 </body>
 <% include("partials/footer.ejs")%>

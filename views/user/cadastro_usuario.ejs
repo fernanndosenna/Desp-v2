@@ -1,46 +1,57 @@
 <%- include("../partials/header.ejs") %>
-
 <body>
-    <header>
-        <h2>Cadastro de usuário</h2>
-    </header>
-    <div>
-        <% if(msgErr) {%>
-            <div class="alert alert-danger">
-                <p><%= msgErr %></p>
-
-            </div>
-        <% } %>
-        <% if(msgSuccess) {%>
-            <div class="alert alert-success">
-                <p><%= msgSuccess %></p>
-
-            </div>
-        <% } %>
-        <form action="/cadastro/salvar" method="post">
+    <main id="home-style">
+        <div class="vertical-background-1">
             <div>
-                <label for="">Nome: </label>
-                <input name="nome" type="text" placeholder="Usuário"/>
+                <h1>Cadastro de Usuário</h1>
+                <hr>
             </div>
+        </div>
+       
+        <div id="nav-style-div">
+                <div class="cadastro-container">
+                    <% if(msgErr) {%>
+                        <div class="alert alert-danger">
+                            <p><%= msgErr %></p>
             
-            <div>
-                <label for="">Email: </label>
-                <input name="email" type="text" placeholder="Usuário"/>
-            </div>
-
-            <div>
-                <label for="">Nome de usuario: </label>
-                <input name="nomeUsuario" type="text" placeholder="Usuário"/>
-            </div>
-
-            <div>
-                <label for="">Senha: </label>
-                <input name="senha" type="password" placeholder="senha"/>
-            </div>
-            <button>Cadastrar</button>
-            <a href="/login/usuario"><span>Login</span></a>
-
-        </form>
-    </div>
+                        </div>
+                    <% } %>
+                    <% if(msgSuccess) {%>
+                        <div class="alert alert-success">
+                            <p><%= msgSuccess %></p>
+            
+                        </div>
+                    <% } %>
+                    <form action="/cadastro/salvar" method="post">
+                        <div>
+                            <label for="">Nome: </label>
+                            <input name="nome" type="text" placeholder="Usuário"/>
+                        </div>
+                        
+                        <div>
+                            <label for="">Email: </label>
+                            <input name="email" type="text" placeholder="Usuário"/>
+                        </div>
+            
+                        <div>
+                            <label for="">Nome de usuario: </label>
+                            <input name="nomeUsuario" type="text" placeholder="Usuário"/>
+                        </div>
+            
+                        <div>
+                            <label for="">Senha: </label>
+                            <input name="senha" type="password" placeholder="senha"/>
+                        </div>
+                        <button class="botao-estilo">Cadastrar</button>
+                        <a class="botao-estilo" href="/login/usuario"><span>Login</span></a>
+            
+                    </form>
+                </div>
+        </div>
+       
+        <div class="vertical-background-2">
+            <img width="600px" src="/img/Desk-Manager-Controle-de-Despesas.png" alt="Homem">
+        </div>
+    </main>
 </body>
 <%- include("../partials/footer.ejs") %>

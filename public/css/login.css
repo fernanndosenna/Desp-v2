@@ -1,0 +1,75 @@
+.main-login{
+    height:100vh;
+    overflow:hidden;
+}
+
+.fundo-login-1{
+    background: #fff;
+    display: flex;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  
+}
+.form-login-container{
+    padding: 20px 0;
+    width:400px;
+}
+.form-login-container form{
+    padding-bottom: 20px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.form-login-container form input{
+    background: #EFEFEF;
+    border: 1px solid #A9A9A9;
+    box-sizing: border-box;
+    border-radius: 45px;
+    text-align: center;
+}
+.form-login-container form label{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: #757575;
+}
+.form-login-container form div{
+    margin-top: 20px;
+}
+.fundo-login-1 div{
+    text-align: center;
+}
+.form-login-container div{
+    display:flex;
+    flex-direction: column;
+    width: 200px;
+}
+.main-login  header{
+    padding:50px 0;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.main-login header h2{
+    color:#757575;
+
+}
+.main-login  header hr{
+    width:200px;
+}
+
+.fundo-login-2{
+    background: #75976C;
+    height: 200px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+}
