@@ -1,6 +1,7 @@
 /* ESSE ARQUIVO É O CONTROLER QUE FAZ O GERENCIAMENTO DE ROTAS E FAZ LIGAÇÃO COM O MODEL*/
 const knex = require("../database/connection")
 const Despesas = require("../models/Despesas")
+const Usuario = require("../models/Usuario")
 
 class registroDespesasController{
 
@@ -8,17 +9,23 @@ class registroDespesasController{
     async indexRegistro(req,res){
         var msgErr = req.flash("msgErr"); //vai atrás da variavel que contém a mensagem
         var msgSuccess = req.flash("msgSuccess"); //vai atrás da variavel que contém a mensagem
+     
+        var usuarioDaSessaoID = parseInt(req.session.user.id)
 
+        var usuario = await Usuario.encontreUsuarioPorID(usuarioDaSessaoID);
+     
         msgErr = (msgErr == undefined  || msgErr.length == 0 ) ? undefined : msgErr
         msgSuccess = (msgSuccess == undefined  || msgSuccess.length == 0 ) ? undefined : msgSuccess
 
 
-        var listaDespesas = await Despesas.pegarTodasDespesas();
+        var listaDespesas = await Despesas.pegarTodasDespesasDoUsuario(usuario);
+
+        var balanca = await Despesas.atualizarValoresDaBalanca(usuario)
 
         if(listaDespesas == undefined){
             listaDespesas = []
         }
-        res.render("registro_despesa", {listaDespesas, msgErr,msgSuccess});
+        res.render("registro_despesa", {listaDespesas, msgErr,msgSuccess, balanca,  usuario});
     }
 
 
@@ -26,7 +33,8 @@ class registroDespesasController{
 
     //metodo de cadastro através do model Despesas
     async cadastrarDespesas(req,res){
-        var { tipo, descricao, valor, data } = req.body;
+        var { tipo, descricao, valor, data, usuario_id } = req.body;
+        var conversaoIDusuario = parseInt(usuario_id); // pegando o usuario dono das despesas
         var msgErr
         var msgSuccess
 
@@ -53,7 +61,7 @@ class registroDespesasController{
             res.redirect("/")
         }
 
-        await Despesas.cadastrar(tipo, descricao, valor,data);
+        await Despesas.cadastrar(tipo, descricao, valor,data, conversaoIDusuario);
 
         res.redirect("/")
         console.log("cadastro com sucesso!");
@@ -153,6 +161,8 @@ class registroDespesasController{
         }
     
     }
+
+
 
 }
 

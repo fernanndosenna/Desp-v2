@@ -101,8 +101,12 @@ class usuarioController{
     //autenticar
     async autenticar(req,res){
         const {email, senha} = req.body;
+        var usuarioExiste = await usuario.encontrePorEmail(email);
         var msgErr
 
+        if(usuarioExiste == undefined){
+            msgErr = "Usuário não existe ou senha incorreta!"
+        }
         if(email == undefined || email == '' || email == ' '){
             msgErr = "Email não pode ser em branco!"
             
@@ -123,6 +127,7 @@ class usuarioController{
             
             if(correta){
                 req.session.user = {
+                    nome: user.nome,
                     id: user.id,
                     email: user.email
                 }
@@ -131,15 +136,9 @@ class usuarioController{
                 res.redirect("/login/usuario");
             }
          
-        }else{
-            msgErr = "Usuário nao existe!"
+        }  
 
-        }     
-
-        if(msgErr != undefined){
-            req.flash("msgErr", msgErr)
-            res.redirect("/login/usuario")
-        }
+      
     }
 
     //deslogar usuario

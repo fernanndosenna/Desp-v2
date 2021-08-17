@@ -28,8 +28,9 @@ CREATE TABLE `despesas` (
   `descricao` varchar(150) DEFAULT NULL,
   `valor` int DEFAULT NULL,
   `data` varchar(150) DEFAULT NULL,
+  `usuario_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +39,7 @@ CREATE TABLE `despesas` (
 
 LOCK TABLES `despesas` WRITE;
 /*!40000 ALTER TABLE `despesas` DISABLE KEYS */;
+INSERT INTO `despesas` VALUES (19,'Salário','meu salario',2000,'1998-12-01',0),(20,'notebook','meu notebook',-1000,'19998-12-09',0),(23,'pizza','pizza',-20,'1998-12-10',5),(24,'salario','meu salario',2000,'1998-12-09',1),(25,'leite','meu leite',-20,'1998-12-09',1);
 /*!40000 ALTER TABLE `despesas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-02  0:37:25
+-- Dump completed on 2021-08-17 12:39:28

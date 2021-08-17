@@ -10,16 +10,19 @@
             <div class="header-titulo">
                 <h2>Controle de despesa</h2>
                 <hr class="header-titulo-hr">
+                <br>
+                <p>Usuário Logado: <b><%= usuario.nome %></b></p>
             </div>
             <div class="form-container">
                 <form action="/despesas/cadastrar"  method="post">
                     <div class="input-container">
+                                <input type="hidden" name="usuario_id" value="<%=  usuario.id %>"/>            
                                 <label>Tipo</label>
                                 <input id="tipo" type="text" name="tipo"  placeholder="Tipo da despesa"/>
                     </div>
 
                     <div class="input-container">
-                                <label for="valor">Valor</label>
+                                <label for="valor">Valor Negativo ou Positivo</label>
                                 <input id="valor" type="number" name="valor"  placeholder="valor"/>
                     </div>
 
@@ -37,6 +40,11 @@
                             <button>Cadastrar</button>
                      </div>
                 </form>
+                <div class="balance-container">
+                    <h2 class="text-warning">Total: +<%= balanca.total %></h2>
+                    <h3 class="text-success">Renda: + <%= balanca.renda %></h3>
+                    <h4 class="text-danger">Despesa: <%= balanca.despesa %></h4>
+                </div>
             </div>
 
             <% if(msgErr) {%>

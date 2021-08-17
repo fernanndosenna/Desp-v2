@@ -5,11 +5,11 @@ const usuarioController = require("../controllers/usuarioController")
 const adminAuth = require("../middlewares/adminAuth")
 
 //rotas de gerenciamento de despesas
-router.get("/", adminAuth, registroDespesasController.indexRegistro);
-router.post("/despesas/cadastrar",adminAuth,  registroDespesasController.cadastrarDespesas);
-router.get("/despesas/edit/:id",adminAuth, registroDespesasController.editarDespesa) //renderizando view de edit de despesa
-router.post("/despesas/atualizar",adminAuth, registroDespesasController.atualizarDespesa);
-router.get("/despesas/deletar/:id",adminAuth, registroDespesasController.deletarDespesa);
+router.get("/", adminAuth,  registroDespesasController.indexRegistro);
+router.post("/despesas/cadastrar", adminAuth,  registroDespesasController.cadastrarDespesas);
+router.get("/despesas/edit/:id", adminAuth, registroDespesasController.editarDespesa) //renderizando view de edit de despesa
+router.post("/despesas/atualizar", adminAuth, registroDespesasController.atualizarDespesa);
+router.get("/despesas/deletar/:id", adminAuth, registroDespesasController.deletarDespesa);
 
 //rotas de gerenciamento de usuario
 router.get("/cadastro/usuario", usuarioController.indexCadastro);

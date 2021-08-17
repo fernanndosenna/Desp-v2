@@ -4,11 +4,15 @@ const knex = require("../database/connection"); //ativando a conexao com o banco
 class Despesas{
 
     //cadstrando despesas
-    async cadastrar(tipo,descricao,valor,data){
+    async cadastrar(tipo,descricao,valor,data, conversaoIDusuario){
 
         const dataConversao = data.toString();
         try {
-            const resultado = await knex.insert({tipo: tipo, descricao: descricao, valor: valor, data: dataConversao }).table("despesas")
+            const resultado = await 
+            knex.insert({
+                tipo: tipo, descricao: descricao, valor: valor, data: dataConversao,
+                 usuario_id: conversaoIDusuario 
+            }).table("despesas")
 
             return true;
 
@@ -18,13 +22,14 @@ class Despesas{
     }
 
     // pegando todas as despesas do banco de dados
-    async pegarTodasDespesas(){
+    async pegarTodasDespesasDoUsuario(usuario){
         try {
             var dados = await knex
             .select(["id","tipo","descricao","valor","data"])
-            .table("despesas")
+            .table("despesas").where({usuario_id: usuario.id})
             .orderBy("id", "desc")
 
+            console.log(dados)
             if(dados.length > 0)
                 return dados
             else
@@ -72,6 +77,37 @@ class Despesas{
         }
     }
 
+
+    async atualizarValoresDaBalanca(usuarioID){
+        //balanca
+
+        var listaDeTransacoes = await this.pegarTodasDespesasDoUsuario(usuarioID);
+            if(listaDeTransacoes == undefined)
+            listaDeTransacoes = []
+          
+        var transacoesValores = listaDeTransacoes
+        .map(somenteValores => somenteValores.valor);
+       
+
+        var total = transacoesValores
+        .reduce((accumulator,transacoes) => accumulator + transacoes, 0)
+        .toFixed(2)
+
+
+        var renda = transacoesValores
+        .filter(valor => valor > 0)
+        .reduce((accumulator, valor) => accumulator + valor,0)
+        .toFixed(2)
+
+        var despesa = transacoesValores
+        .filter(value => value < 0)
+        .reduce((accumulator, valor) => accumulator + valor,0)
+        
+     
+
+        
+        return ({total,renda,despesa})
+    }
 
 
 }

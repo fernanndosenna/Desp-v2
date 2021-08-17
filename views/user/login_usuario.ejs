@@ -4,10 +4,14 @@
     <header>
         <h2>Login de Usuário</h2>
         <hr>
+        <% if(msgErr) {%>
+          <p class="alert alert-danger" style="position: absolute; top: 150px;"><%= msgErr %></p>
+       <% } %>
     </header>
       <div class="fundo-login-1">
-        
+ 
         <div class="form-login-container">
+   
             <form action="/login/autenticar" method="post">   
                    <div>
                     <label for="">Email: </label>

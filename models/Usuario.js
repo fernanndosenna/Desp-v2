@@ -64,6 +64,14 @@ class Usuario{
         }
     }
 
+    async encontreUsuarioPorID(usuarioDaSessaoID){
+        var resultado = await knex.select("id","nome").where({id : usuarioDaSessaoID}).table("usuarios")
+        if( resultado.length > 0){
+            return resultado[0]
+        }else{
+            return undefined
+        }
+    }
     async encontreUsuario(email){
         var resultado = await knex
         .select("id","email","senha")
